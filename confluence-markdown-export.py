@@ -188,15 +188,24 @@ class Converter:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("url", type=str, help="The url to the confluence instance")
-    parser.add_argument("username", type=str, help="The username")
-    parser.add_argument("token", type=str, help="The access token to Confluence")
-    parser.add_argument("out_dir", type=str, help="The directory to output the files to")
-    parser.add_argument("--space", type=str, required=False, default=None, help="Spaces to export")
-    parser.add_argument("--skip-attachments", action="store_true", dest="no_attach", required=False,
-                        default=False, help="Skip fetching attachments")
-    parser.add_argument("--no-fetch", action="store_true", dest="no_fetch", required=False,
-                        default=False, help="This option only runs the markdown conversion")
+    parser.add_argument(
+        "--url",
+        default=os.environ["CONFLUENCE_URL"],
+        type=str,
+        help="The url to the confluence instance",
+    )
+    parser.add_argument(
+        "--username",
+        type=str,
+        default=os.environ["CONFLUENCE_USERNAME"],
+        help="The username",
+    )
+    parser.add_argument(
+        "--token",
+        type=str,
+        default=os.environ["CONFLUENCE_PASSWORD"],
+        help="The access token to Confluence",
+    )
     args = parser.parse_args()
     
     if not args.no_fetch:
